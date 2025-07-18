@@ -22,4 +22,45 @@
   - [ ] 사전캠프 퀘스트: 인터렉션 구현
 - Today I Learned
   - 오랜만에 언리얼 프로젝트를 처움부터 다시 구성
-  - 기존 학습간에 제공되는 케릭터 블루 프린트를 사용했으나, 나만의 커스텀 캐릭터를 위한 c++ 케릭터클래스를 작성하고 리페런팅을 통해 케릭터를 생성해봄
+  - 나만의 커스텀 캐릭터를 위한 c++ 케릭터클래스를 작성하고 리페런팅을 통해 케릭터를 생성해봄
+
+#### 25.07.18
+- To Do List 
+  - [x] 사전캠프 퀘스트: 인터렉션 구현
+- Today I Learned
+  - 상속을 통한 InteractableItem Class 구현 및 Interact함수 오버라이딩
+  - 벡터의 외적을 통한 문과 플레이어간의 위치 관계 판별
+  ```c++
+  // InteractableItem.h
+  class SPARTAPRECAMP_API AInteractableActor : public AActor
+  {
+  public:
+  	virtual void Interact();
+  };
+
+  // Door.h
+  class SPARTAPRECAMP_API ADoor : public AInteractableActor
+  {
+  public:
+  	virtual void Interact() override;
+  }
+
+  // Door.cpp
+  void ADoor::Interact()
+  {
+  	Super::Interact();
+  
+  	IsInteracted = true;
+  	if (IsOpen == false) {
+  
+  		APawn* Pawn = GetWorld()->GetFirstPlayerController()->GetPawn();
+  		if (Pawn == nullptr) return;
+
+            //벡터의 외적을 통한 위치관계 판별
+  		FVector AVector = GetActorRightVector();
+  		FVector BVector = (Pawn->GetActorLocation() - GetActorLocation()).GetSafeNormal();
+  		FVector CrossRes = FVector::CrossProduct(AVector, BVector);
+  		IsPositiveOpenDirection = CrossRes.Z < 0;
+  	}
+  }
+  ```
