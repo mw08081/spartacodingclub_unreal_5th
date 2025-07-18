@@ -24,6 +24,7 @@
   - 오랜만에 언리얼 프로젝트를 처움부터 다시 구성
   - 나만의 커스텀 캐릭터를 위한 c++ 케릭터클래스를 작성하고 리페런팅을 통해 케릭터를 생성해봄
   ```C++
+  // MyCharacter.cpp
   void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
   {
       Super::SetupPlayerInputComponent(PlayerInputComponent);
