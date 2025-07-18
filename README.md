@@ -39,32 +39,32 @@
   class SPARTAPRECAMP_API AInteractableActor : public AActor
   {
   public:
-    virtual void Interact();
+      virtual void Interact();
   };
 
   // Door.h
   class SPARTAPRECAMP_API ADoor : public AInteractableActor
   {
   public:
-    virtual void Interact() override;
+      virtual void Interact() override;
   }
 
   // Door.cpp
   void ADoor::Interact()
   {
-  	Super::Interact();
-  
-  	IsInteracted = true;
-  	if (IsOpen == false) {
-  		APawn* Pawn = GetWorld()->GetFirstPlayerController()->GetPawn();
-  		if (Pawn == nullptr) return;
+      Super::Interact();
+
+      IsInteracted = true;
+      if (IsOpen == false) {
+          APawn* Pawn = GetWorld()->GetFirstPlayerController()->GetPawn();
+          if (Pawn == nullptr) return;
 
           //벡터의 외적을 통한 위치관계 판별
-  		FVector AVector = GetActorRightVector();
-  		FVector BVector = (Pawn->GetActorLocation() - GetActorLocation()).GetSafeNormal();
-  		FVector CrossRes = FVector::CrossProduct(AVector, BVector);
-  		IsPositiveOpenDirection = CrossRes.Z < 0;
-  	}
+          FVector AVector = GetActorRightVector();
+          FVector BVector = (Pawn->GetActorLocation() - GetActorLocation()).GetSafeNormal();
+          FVector CrossRes = FVector::CrossProduct(AVector, BVector);
+          IsPositiveOpenDirection = CrossRes.Z < 0;
+      }
   }
 
   void AWeapon::Interact()
