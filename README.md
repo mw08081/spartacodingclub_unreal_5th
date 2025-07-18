@@ -23,10 +23,63 @@
 - Today I Learned
   - 오랜만에 언리얼 프로젝트를 처움부터 다시 구성
   - 나만의 커스텀 캐릭터를 위한 c++ 케릭터클래스를 작성하고 리페런팅을 통해 케릭터를 생성해봄
+  ```C++
+  void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+  {
+      Super::SetupPlayerInputComponent(PlayerInputComponent);
+      
+      PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &AMyCharacter::MoveForward);
+      PlayerInputComponent->BindAxis(TEXT("MoveRight"), this, &AMyCharacter::MoveRight);
+      
+      PlayerInputComponent->BindAxis(TEXT("LookVertical"), this, &APawn::AddControllerPitchInput);
+      PlayerInputComponent->BindAxis(TEXT("LookHorizontal"), this, &APawn::AddControllerYawInput);
+      
+      PlayerInputComponent->BindAction(TEXT("Jump"), EInputEvent::IE_Pressed, this, &ACharacter::Jump);
+      PlayerInputComponent->BindAction(TEXT("Interact") , EInputEvent::IE_Pressed, this, &AMyCharacter::Interact);
+  }
+  
+  void AMyCharacter::MoveForward(float Value)
+  {
+      AddMovementInput(GetActorForwardVector() * Value);
+  }
+  
+  void AMyCharacter::MoveRight(float Value)
+  {
+      AddMovementInput(GetActorRightVector() * Value);
+  }
+  
+  void AMyCharacter::Interact()
+  {
+      FCollisionShape CollisionShape = FCollisionShape::MakeSphere(50.0f); // 반지름 50 구체
+      FHitResult HitResult;
+      FVector Start = GetActorLocation();
+      FVector End = Start + GetActorForwardVector() * 500.0f;
+
+      // sweeping
+      bool bHit = GetWorld()->SweepSingleByChannel(
+          HitResult,
+          Start,
+          End,
+          FQuat::Identity,
+          ECC_Visibility,
+          CollisionShape
+      );
+      
+      if (bHit && HitResult.GetActor())
+      {
+          // HitResult 정보 활용
+          if (HitResult.GetActor()->ActorHasTag("interactable")) {
+              UE_LOG(LogTemp, Display, TEXT("Interaction !!"));
+              AInteractableActor* Interactable = Cast<AInteractableActor>(HitResult.GetActor());
+              Interactable->Interact();
+          }
+      }
+  }
+  ```
 
 #### 25.07.18
 - To Do List 
-  - [x] 사전캠프 퀘스트: 인터렉션 구현
+  - [x] 사전캠프 퀘스트: 아이템 인터렉션 구현
 - Today I Learned
   - 상속을 통한 InteractableItem Class 구현 및 Interact함수 오버라이딩
   - 벡터의 외적을 통한 문과 플레이어간의 위치 관계 판별
