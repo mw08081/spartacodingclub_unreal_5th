@@ -62,8 +62,8 @@
           //벡터의 외적을 통한 위치관계 판별
           FVector AVector = GetActorRightVector();
           FVector BVector = (Pawn->GetActorLocation() - GetActorLocation()).GetSafeNormal();
-          FVector CrossRes = FVector::CrossProduct(AVector, BVector);
-          IsPositiveOpenDirection = CrossRes.Z < 0;
+          FVector CrossVec = FVector::CrossProduct(AVector, BVector);
+          IsPositiveOpenDirection = CrossVec.Z < 0;
       }
   }
 
