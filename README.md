@@ -56,7 +56,6 @@
   
   	IsInteracted = true;
   	if (IsOpen == false) {
-  
   		APawn* Pawn = GetWorld()->GetFirstPlayerController()->GetPawn();
   		if (Pawn == nullptr) return;
 
@@ -72,7 +71,6 @@
   {
       ACharacter* Character = GetWorld()->GetFirstPlayerController()->GetCharacter();
       if (Character) {
-  
           USkeletalMeshComponent* CharacterMesh = Character->GetMesh();
           if (CharacterMesh)
           {
