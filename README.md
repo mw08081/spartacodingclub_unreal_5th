@@ -60,7 +60,7 @@
   		APawn* Pawn = GetWorld()->GetFirstPlayerController()->GetPawn();
   		if (Pawn == nullptr) return;
 
-            //벡터의 외적을 통한 위치관계 판별
+          //벡터의 외적을 통한 위치관계 판별
   		FVector AVector = GetActorRightVector();
   		FVector BVector = (Pawn->GetActorLocation() - GetActorLocation()).GetSafeNormal();
   		FVector CrossRes = FVector::CrossProduct(AVector, BVector);
@@ -71,8 +71,6 @@
   void AWeapon::Interact()
   {
       ACharacter* Character = GetWorld()->GetFirstPlayerController()->GetCharacter();
-  	if (Character == nullptr) return;
-  
       if (Character) {
   
           USkeletalMeshComponent* CharacterMesh = Character->GetMesh();
