@@ -36,14 +36,14 @@
   ```c++
 
   // InteractableItem.h
-  class SPARTAPRECAMP_API AInteractableActor : public AActor
+  class SPARTAPRECAMP_API AInteractableItem : public AActor
   {
   public:
       virtual void Interact();
   };
 
   // Door.h
-  class SPARTAPRECAMP_API ADoor : public AInteractableActor
+  class SPARTAPRECAMP_API ADoor : public AInteractableItem
   {
   public:
       virtual void Interact() override;
