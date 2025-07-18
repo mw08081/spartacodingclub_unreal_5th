@@ -39,14 +39,14 @@
   class SPARTAPRECAMP_API AInteractableActor : public AActor
   {
   public:
-  	virtual void Interact();
+    virtual void Interact();
   };
 
   // Door.h
   class SPARTAPRECAMP_API ADoor : public AInteractableActor
   {
   public:
-  	virtual void Interact() override;
+    virtual void Interact() override;
   }
 
   // Door.cpp
