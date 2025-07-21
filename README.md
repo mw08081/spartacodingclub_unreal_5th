@@ -71,7 +71,7 @@
           // HitResult 정보 활용
           if (HitResult.GetActor()->ActorHasTag("interactable")) {
               UE_LOG(LogTemp, Display, TEXT("Interaction !!"));
-              AInteractableActor* Interactable = Cast<AInteractableActor>(HitResult.GetActor());
+              AInteractableItem* Interactable = Cast<AInteractableItem>(HitResult.GetActor());
               Interactable->Interact();
           }
       }
