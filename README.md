@@ -141,10 +141,9 @@
   - [ ] 사전캠프 c++ 강의 3-1강 프리뷰
 - Today I Learned
   - Basis 프로젝트 빌드간 오류를 해결하기위해.. 열심히 구글링하였으나 아직 해결하지 못함.. -> UE5.4를 설치해서 해결
-  - `UKismetMathLibrary::FindLookAtRotaiton()`에 대해서 자세히 알아보기
 
 ### 25.07.22
 - To Do List
   - [ ] 사전캠프 c++ 강의 3-1강 구현
 - Today I Learned
-  - ing.. 
+  - `UKismetMathLibrary::FindLookAtRotaiton()`
