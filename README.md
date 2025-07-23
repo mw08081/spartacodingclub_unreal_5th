@@ -24,60 +24,60 @@
 - Today I Learned
   - 오랜만에 언리얼 프로젝트를 처움부터 다시 구성
   - 나만의 커스텀 캐릭터를 위한 c++ 케릭터클래스를 작성하고 리페런팅을 통해 케릭터를 생성해봄
-  ```C++
-  // MyCharacter.cpp
-  void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-  {
-      Super::SetupPlayerInputComponent(PlayerInputComponent);
-      
-      PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &AMyCharacter::MoveForward);
-      PlayerInputComponent->BindAxis(TEXT("MoveRight"), this, &AMyCharacter::MoveRight);
-      
-      PlayerInputComponent->BindAxis(TEXT("LookVertical"), this, &APawn::AddControllerPitchInput);
-      PlayerInputComponent->BindAxis(TEXT("LookHorizontal"), this, &APawn::AddControllerYawInput);
-      
-      PlayerInputComponent->BindAction(TEXT("Jump"), EInputEvent::IE_Pressed, this, &ACharacter::Jump);
-      PlayerInputComponent->BindAction(TEXT("Interact") , EInputEvent::IE_Pressed, this, &AMyCharacter::Interact);
-  }
+    ```C++
+    // MyCharacter.cpp
+    void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+    {
+        Super::SetupPlayerInputComponent(PlayerInputComponent);
+        
+        PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &AMyCharacter::MoveForward);
+        PlayerInputComponent->BindAxis(TEXT("MoveRight"), this, &AMyCharacter::MoveRight);
+        
+        PlayerInputComponent->BindAxis(TEXT("LookVertical"), this, &APawn::AddControllerPitchInput);
+        PlayerInputComponent->BindAxis(TEXT("LookHorizontal"), this, &APawn::AddControllerYawInput);
+        
+        PlayerInputComponent->BindAction(TEXT("Jump"), EInputEvent::IE_Pressed, this, &ACharacter::Jump);
+        PlayerInputComponent->BindAction(TEXT("Interact") , EInputEvent::IE_Pressed, this, &AMyCharacter::Interact);
+    }
+    
+    void AMyCharacter::MoveForward(float Value)
+    {
+        AddMovementInput(GetActorForwardVector() * Value);
+    }
+    
+    void AMyCharacter::MoveRight(float Value)
+    {
+        AddMovementInput(GetActorRightVector() * Value);
+    }
+    
+    void AMyCharacter::Interact()
+    {
+        FCollisionShape CollisionShape = FCollisionShape::MakeSphere(50.0f); // 반지름 50 구체
+        FHitResult HitResult;
+        FVector Start = GetActorLocation();
+        FVector End = Start + GetActorForwardVector() * 500.0f;
   
-  void AMyCharacter::MoveForward(float Value)
-  {
-      AddMovementInput(GetActorForwardVector() * Value);
-  }
-  
-  void AMyCharacter::MoveRight(float Value)
-  {
-      AddMovementInput(GetActorRightVector() * Value);
-  }
-  
-  void AMyCharacter::Interact()
-  {
-      FCollisionShape CollisionShape = FCollisionShape::MakeSphere(50.0f); // 반지름 50 구체
-      FHitResult HitResult;
-      FVector Start = GetActorLocation();
-      FVector End = Start + GetActorForwardVector() * 500.0f;
-
-      // sweeping
-      bool bHit = GetWorld()->SweepSingleByChannel(
-          HitResult,
-          Start,
-          End,
-          FQuat::Identity,
-          ECC_Visibility,
-          CollisionShape
-      );
-      
-      if (bHit && HitResult.GetActor())
-      {
-          // HitResult 정보 활용
-          if (HitResult.GetActor()->ActorHasTag("interactable")) {
-              UE_LOG(LogTemp, Display, TEXT("Interaction !!"));
-              AInteractableItem* Interactable = Cast<AInteractableItem>(HitResult.GetActor());
-              Interactable->Interact();
-          }
-      }
-  }
-  ```
+        // sweeping
+        bool bHit = GetWorld()->SweepSingleByChannel(
+            HitResult,
+            Start,
+            End,
+            FQuat::Identity,
+            ECC_Visibility,
+            CollisionShape
+        );
+        
+        if (bHit && HitResult.GetActor())
+        {
+            // HitResult 정보 활용
+            if (HitResult.GetActor()->ActorHasTag("interactable")) {
+                UE_LOG(LogTemp, Display, TEXT("Interaction !!"));
+                AInteractableItem* Interactable = Cast<AInteractableItem>(HitResult.GetActor());
+                Interactable->Interact();
+            }
+        }
+    }
+    ```
 
 ### 25.07.18
 - To Do List 
@@ -88,53 +88,53 @@
   - 캐릭터의 스켈레탈 메쉬 소켓에 무기 부착  
   ![GIF 2025-07-18 오후 4-51-44](https://github.com/user-attachments/assets/2e8531ca-de98-403d-8d70-cedda96238d5)
   ![GIF 2025-07-18 오후 4-52-14](https://github.com/user-attachments/assets/6a9e3958-e8a5-4cde-b705-3e265fc511fa)
-  ```c++
-
-  // InteractableItem.h
-  class SPARTAPRECAMP_API AInteractableItem : public AActor
-  {
-  public:
-      virtual void Interact();
-  };
-
-  // Door.h
-  class SPARTAPRECAMP_API ADoor : public AInteractableItem
-  {
-  public:
-      virtual void Interact() override;
-  }
-
-  // Door.cpp
-  void ADoor::Interact()
-  {
-      Super::Interact();
-
-      IsInteracted = true;
-      if (IsOpen == false) {
-          APawn* Pawn = GetWorld()->GetFirstPlayerController()->GetPawn();
-          if (Pawn == nullptr) return;
-
-          //벡터의 외적을 통한 위치관계 판별
-          FVector AVector = GetActorRightVector();
-          FVector BVector = (Pawn->GetActorLocation() - GetActorLocation()).GetSafeNormal();
-          FVector CrossVec = FVector::CrossProduct(AVector, BVector);
-          IsPositiveOpenDirection = CrossVec.Z < 0;
-      }
-  }
-
-  void AWeapon::Interact()
-  {
-      ACharacter* Character = GetWorld()->GetFirstPlayerController()->GetCharacter();
-      if (Character) {
-          USkeletalMeshComponent* CharacterMesh = Character->GetMesh();
-          if (CharacterMesh)
-          {
-              FName HandSocket(TEXT("hand_rSocket"));
-              AttachToComponent(CharacterMesh, FAttachmentTransformRules::SnapToTargetNotIncludingScale, HandSocket);
-          }
-      }
-  }
-  ```
+    ```c++
+  
+    // InteractableItem.h
+    class SPARTAPRECAMP_API AInteractableItem : public AActor
+    {
+    public:
+        virtual void Interact();
+    };
+  
+    // Door.h
+    class SPARTAPRECAMP_API ADoor : public AInteractableItem
+    {
+    public:
+        virtual void Interact() override;
+    }
+  
+    // Door.cpp
+    void ADoor::Interact()
+    {
+        Super::Interact();
+  
+        IsInteracted = true;
+        if (IsOpen == false) {
+            APawn* Pawn = GetWorld()->GetFirstPlayerController()->GetPawn();
+            if (Pawn == nullptr) return;
+  
+            //벡터의 외적을 통한 위치관계 판별
+            FVector AVector = GetActorRightVector();
+            FVector BVector = (Pawn->GetActorLocation() - GetActorLocation()).GetSafeNormal();
+            FVector CrossVec = FVector::CrossProduct(AVector, BVector);
+            IsPositiveOpenDirection = CrossVec.Z < 0;
+        }
+    }
+  
+    void AWeapon::Interact()
+    {
+        ACharacter* Character = GetWorld()->GetFirstPlayerController()->GetCharacter();
+        if (Character) {
+            USkeletalMeshComponent* CharacterMesh = Character->GetMesh();
+            if (CharacterMesh)
+            {
+                FName HandSocket(TEXT("hand_rSocket"));
+                AttachToComponent(CharacterMesh, FAttachmentTransformRules::SnapToTargetNotIncludingScale, HandSocket);
+            }
+        }
+    }
+    ```
 
 ### 25.07.21
 - To Do List
@@ -153,62 +153,62 @@
   - [x] 사전캠프 c++ 강의 3-1강 구현
 - Today I Learned
   - How to bind EnhancedInputAction to EnhancedInputComponent at Unreal Engine5
-  ```c++
-  void APlayerBase::SetupPlayerInputComponent(UInputComponent* PlayerInputController)
-  {
-  	Super::SetupPlayerInputComponent(PlayerInputController);
-  
-  	if (UEnhancedInputComponent* EnhancedInputComponent = Cast< UEnhancedInputComponent>(PlayerInputController))
-  	{
-  		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &APlayerBase::Move);
-  		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &APlayerBase::Look);
-  		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Started, this, &APlayerBase::Fire);
-  		EnhancedInputComponent->BindAction(ZoomAction, ETriggerEvent::Triggered, this, &APlayerBase::Zoom);
-  	}
-  }
-  ```
+    ```c++
+    void APlayerBase::SetupPlayerInputComponent(UInputComponent* PlayerInputController)
+    {
+    	Super::SetupPlayerInputComponent(PlayerInputController);
+    
+    	if (UEnhancedInputComponent* EnhancedInputComponent = Cast< UEnhancedInputComponent>(PlayerInputController))
+    	{
+    		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &APlayerBase::Move);
+    		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &APlayerBase::Look);
+    		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Started, this, &APlayerBase::Fire);
+    		EnhancedInputComponent->BindAction(ZoomAction, ETriggerEvent::Triggered, this, &APlayerBase::Zoom);
+    	}
+    }
+    ```
   - WeaponeBase.cpp
-  ```c++
-  void AWeaponBase::Fire()
-  {
-    // 애니메이션 몽타주도 Spawn()이후에 출력하는게 나을 듯
-  	UAnimInstance* AnimInstance = Mesh->GetAnimInstance();
-  	if (IsValid(AnimInstance) && IsValid(FireAnimMontage)) {
-  		AnimInstance->Montage_Play(FireAnimMontage);
-  	}
+    ```c++
+    void AWeaponBase::Fire()
+    {
+      // 애니메이션 몽타주도 Spawn()이후에 출력하는게 나을 듯
+    	UAnimInstance* AnimInstance = Mesh->GetAnimInstance();
+    	if (IsValid(AnimInstance) && IsValid(FireAnimMontage)) {
+    		AnimInstance->Montage_Play(FireAnimMontage);
+    	}
+    
+    	if (IsValid(BulletClass)) {
+    		FRotator SpawnRotation = MuzzleOffset->GetComponentRotation();
+    		FVector SpawnLocation = MuzzleOffset->GetComponentLocation();
+    
+    		FActorSpawnParameters SpawnParams;
+    		SpawnParams.Owner = this;
+    
+    		// 왜 APlayerBase로 캐스팅해야돼? Enmey가 총을 쏠 수도 있잖아
+    		APlayerBase* Owner = Cast<APlayerBase>(GetOwner());
+    		if (!IsValid(Owner)) return;
+    
+    		APlayerController* PlayerController = Cast<APlayerController>(Owner->GetController());
+    		if (!IsValid(PlayerController)) return;
+    
+    		int32 x, y;
+    		PlayerController->GetViewportSize(x, y);
   
-  	if (IsValid(BulletClass)) {
-  		FRotator SpawnRotation = MuzzleOffset->GetComponentRotation();
-  		FVector SpawnLocation = MuzzleOffset->GetComponentLocation();
+        // WorldCenter의 존재 이유: ??? 디버깅 필요 (WorldFront * 10000 더해지기전 값)
+    		FVector WorldCenter;
+    		FVector WorldFront;
+    		PlayerController->DeprojectScreenPositionToWorld(x * 0.5f, y * 0.5f, WorldCenter, WorldFront);
   
-  		FActorSpawnParameters SpawnParams;
-  		SpawnParams.Owner = this;
-  
-  		// 왜 APlayerBase로 캐스팅해야돼? Enmey가 총을 쏠 수도 있잖아
-  		APlayerBase* Owner = Cast<APlayerBase>(GetOwner());
-  		if (!IsValid(Owner)) return;
-  
-  		APlayerController* PlayerController = Cast<APlayerController>(Owner->GetController());
-  		if (!IsValid(PlayerController)) return;
-  
-  		int32 x, y;
-  		PlayerController->GetViewportSize(x, y);
-
-      // WorldCenter의 존재 이유: ??? 디버깅 필요 (WorldFront * 10000 더해지기전 값)
-  		FVector WorldCenter;
-  		FVector WorldFront;
-  		PlayerController->DeprojectScreenPositionToWorld(x * 0.5f, y * 0.5f, WorldCenter, WorldFront);
-
-      // 존재의 이유를 확인
-      UE_LOG(LogTemp, Display, TEXT("World Center: %s"), *WorldCenter.ToCompactString());
-  
-  		WorldCenter += WorldFront * 10000;
-  		SpawnRotation = UKismetMathLibrary::FindLookAtRotation(SpawnLocation, WorldCenter);
-  
-  		GetWorld()->SpawnActor<ABulletBase>(BulletClass, SpawnLocation, SpawnRotation, SpawnParams);
-  	}
-  }
-  ```
+        // 존재의 이유를 확인
+        UE_LOG(LogTemp, Display, TEXT("World Center: %s"), *WorldCenter.ToCompactString());
+    
+    		WorldCenter += WorldFront * 10000;
+    		SpawnRotation = UKismetMathLibrary::FindLookAtRotation(SpawnLocation, WorldCenter);
+    
+    		GetWorld()->SpawnActor<ABulletBase>(BulletClass, SpawnLocation, SpawnRotation, SpawnParams);
+    	}
+    }
+    ```
   - `PlayerController->DeprojectScreenPositionToWorld(~);` 를 활용하는 이유는 `Weapon->GetForwardVector()`를 이용해도 되지만, 해당 벡터가 정확하게 화면 중앙을 타겟팅할 것이라는 보장이 없기때문이다. 추가적으로 Deprojection을 통해 화면의 좌표를 3D월드의 좌표로 확인할 수 있다.
   - `FRotator UKismetMathLibrary::FindLookAtRotation(
     const FVector& Start,
