@@ -193,10 +193,14 @@
   
   		int32 x, y;
   		PlayerController->GetViewportSize(x, y);
-  		
+
+      // WorldCenter의 존재 이유: ??? 디버깅 필요 (WorldFront * 10000 더해지기전 값)
   		FVector WorldCenter;
   		FVector WorldFront;
   		PlayerController->DeprojectScreenPositionToWorld(x * 0.5f, y * 0.5f, WorldCenter, WorldFront);
+
+      // 존재의 이유를 확인
+      UE_LOG(LogTemp, Display, TEXT("World Center: %s"), *WorldCenter.ToCompactString());
   
   		WorldCenter += WorldFront * 10000;
   		SpawnRotation = UKismetMathLibrary::FindLookAtRotation(SpawnLocation, WorldCenter);
@@ -205,5 +209,8 @@
   	}
   }
   ```
-  - `PlayerController->DeprojectScreenPositionToWorld(x * 0.5f, y * 0.5f, WorldCenter, WorldFront);`
-  - `SpawnRotation = UKismetMathLibrary::FindLookAtRotation(SpawnLocation, WorldCenter);`
+  - `PlayerController->DeprojectScreenPositionToWorld(~);` 를 활용하는 이유는 `Weapon->GetForwardVector()`를 이용해도 되지만, 해당 벡터가 정확하게 화면 중앙을 타겟팅할 것이라는 보장이 없기때문이다. 추가적으로 Deprojection을 통해 화면의 좌표를 3D월드의 좌표로 확인할 수 있다.
+  - `FRotator UKismetMathLibrary::FindLookAtRotation(
+    const FVector& Start,
+    const FVector& Target
+);`는 FVector(Target - Start) 를 Rotator값으로 변경해준다.
