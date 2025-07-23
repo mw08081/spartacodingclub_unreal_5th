@@ -152,4 +152,58 @@
 - To Do List
   - [x] 사전캠프 c++ 강의 3-1강 구현
 - Today I Learned
-  - ..
+  - How to bind EnhancedInputAction to EnhancedInputComponent at Unreal Engine5
+  ```c++
+  void APlayerBase::SetupPlayerInputComponent(UInputComponent* PlayerInputController)
+  {
+  	Super::SetupPlayerInputComponent(PlayerInputController);
+  
+  	if (UEnhancedInputComponent* EnhancedInputComponent = Cast< UEnhancedInputComponent>(PlayerInputController))
+  	{
+  		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &APlayerBase::Move);
+  		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &APlayerBase::Look);
+  		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Started, this, &APlayerBase::Fire);
+  		EnhancedInputComponent->BindAction(ZoomAction, ETriggerEvent::Triggered, this, &APlayerBase::Zoom);
+  	}
+  }
+  ```
+  - WeaponeBase.cpp
+  ```c++
+  void AWeaponBase::Fire()
+  {
+    // 애니메이션 몽타주도 Spawn()이후에 출력하는게 나을 듯
+  	UAnimInstance* AnimInstance = Mesh->GetAnimInstance();
+  	if (IsValid(AnimInstance) && IsValid(FireAnimMontage)) {
+  		AnimInstance->Montage_Play(FireAnimMontage);
+  	}
+  
+  	if (IsValid(BulletClass)) {
+  		FRotator SpawnRotation = MuzzleOffset->GetComponentRotation();
+  		FVector SpawnLocation = MuzzleOffset->GetComponentLocation();
+  
+  		FActorSpawnParameters SpawnParams;
+  		SpawnParams.Owner = this;
+  
+  		// 왜 APlayerBase로 캐스팅해야돼? Enmey가 총을 쏠 수도 있잖아
+  		APlayerBase* Owner = Cast<APlayerBase>(GetOwner());
+  		if (!IsValid(Owner)) return;
+  
+  		APlayerController* PlayerController = Cast<APlayerController>(Owner->GetController());
+  		if (!IsValid(PlayerController)) return;
+  
+  		int32 x, y;
+  		PlayerController->GetViewportSize(x, y);
+  		
+  		FVector WorldCenter;
+  		FVector WorldFront;
+  		PlayerController->DeprojectScreenPositionToWorld(x * 0.5f, y * 0.5f, WorldCenter, WorldFront);
+  
+  		WorldCenter += WorldFront * 10000;
+  		SpawnRotation = UKismetMathLibrary::FindLookAtRotation(SpawnLocation, WorldCenter);
+  
+  		GetWorld()->SpawnActor<ABulletBase>(BulletClass, SpawnLocation, SpawnRotation, SpawnParams);
+  	}
+  }
+  ```
+  - `PlayerController->DeprojectScreenPositionToWorld(x * 0.5f, y * 0.5f, WorldCenter, WorldFront);`
+  - `SpawnRotation = UKismetMathLibrary::FindLookAtRotation(SpawnLocation, WorldCenter);`
