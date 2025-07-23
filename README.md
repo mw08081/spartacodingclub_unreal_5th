@@ -146,4 +146,4 @@
 - To Do List
   - [ ] 사전캠프 c++ 강의 3-1강 구현
 - Today I Learned
-  - `UKismetMathLibrary::FindLookAtRotaiton()`
+  - 여전히 빌드오류.. 해결하지 못하고있음
