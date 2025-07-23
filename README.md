@@ -213,4 +213,4 @@
   - `FRotator UKismetMathLibrary::FindLookAtRotation(
     const FVector& Start,
     const FVector& Target
-);`는 FVector(Target - Start) 를 Rotator값으로 변경해준다.
+);`는 FVector(Target - Start) 를 Rotator값으로 변경해준다. 실제로 (Target - Start).Rotator 와 동일한 값을 출력한다.. 그렇다면 왜 있는걸까
