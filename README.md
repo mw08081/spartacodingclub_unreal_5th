@@ -225,8 +225,8 @@
 ### 25.07.24
 - To Do List
   - [x] 사전강의 cpp 3-2 강의
-  - [ ] 사전강의 cpp 3-3 강의
-  - [ ] 사전강의 cpp 3-4 강의
+  - [x] 사전강의 cpp 3-3 강의
+  - [x] 사전강의 cpp 3-4 강의
 - Today I Learned
   - Input Mapping Context 의 WASD 설정
     ```bash
