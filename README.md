@@ -222,3 +222,33 @@
     FRotator rot2 = (Target - Start).Rotator
     // rot == rot2
     ```
+### 25.07.24
+- To Do List
+  - [x] 사전강의 cpp 3-2 강의
+  - [ ] 사전강의 cpp 3-3 강의
+  - [ ] 사전강의 cpp 3-4 강의
+- Today I Learned
+  - Input Mapping Context 의 WASD 설정
+    ```bash
+    // y축기준
+    W -> Swizzle Input Axis Values
+    S -> Swizzle Input Axis Values, Negate
+    A -> Negate
+    D -> None
+    ```
+    <img width="980" height="139" alt="image" src="https://github.com/user-attachments/assets/1f588410-ab9e-415a-a2de-5f5778c2f7b7" />
+  - Input Mapping Context Bind At CPP
+    ```c++
+    // PlayerBase.h
+    UPROPERTY(EditDefaultsOnly)
+    class UInputMappingContext* InputMappingContext;
+    
+    // PlayerBase.cpp
+    APlayerController* PlayerController = Cast<APlayerController>(GetController());
+    if (IsValid(PlayerController)) {
+    	ULocalPlayer* Player = PlayerController->GetLocalPlayer();
+    	if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(Player)) {
+    		Subsystem->AddMappingContext(InputMappingContext, 0);
+    	}
+    }
+    ```
