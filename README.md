@@ -252,3 +252,37 @@
     	}
     }
     ```
+### 25.07.25
+- 병원일정
+
+### 25.07.28
+- To Do List
+  - [x] 사전강의 cpp 3주차 구현
+- Today I Learned
+  - 블루프린트로 UMG를 생성하기위한 바인딩 옵션: `UPROPERTY(meta = (BindWidget))`
+    ```c++
+    UPROPERTY(meta = (BindWidget))
+    class UProgressBar* PB_HPGauge;
+    UPROPERTY(meta = (BindWidget))
+    class UTextBlock* Txt_HPPercent;
+    
+    UPROPERTY(meta = (BindWidget))
+    class UTextBlock* Txt_KillCount;
+    
+    UPROPERTY(meta = (BindWidget))
+    class UTextBlock* Txt_StageLv;
+    ```
+  - FString, FText차이: FText는 UMG에 보통 사용되고, 대부분의 경우 FString이 사용된다고..한다
+    ```c++
+    int32 Val = 30;
+
+    // 변수값 활용
+    FString::FromInt(Val);            // FString
+    FString::Printf(TEXT("%d"), Val); // FString
+
+    // 리터럴 상수 활용
+    FString(TEXT("Literal Constant")); // FSTring
+
+    // FText 변수 생성
+    FText::FromString(FString str);     // FText    
+    ```
