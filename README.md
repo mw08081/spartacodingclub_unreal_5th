@@ -258,6 +258,7 @@
 ### 25.07.28
 - To Do List
   - [x] 사전강의 cpp 3주차 구현
+  - [ ] UMG 값 바인딩 실패 .. 
 - Today I Learned
   - 블루프린트로 UMG를 생성하기위한 바인딩 옵션: `UPROPERTY(meta = (BindWidget))`
     ```c++
