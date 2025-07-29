@@ -287,3 +287,43 @@
     // FText 변수 생성
     FText::FromString(FString str);     // FText    
     ```
+### 25.07.29
+- To Do List
+  - [x] UMG 연결(플레이어 호출, not tick)   
+  - [x] 3주차- Bullet Event Binding: OnHit
+- Today I Learned
+  - UMG를 연결 완료 후, Player -> GameMode -> UMG 순으로 데이터 갱신(원래 GameMode에서 Widget을 가지고 있지 않는다.. 해당 레퍼런스는 로컬게임이니까 대충 한듯으로 보인다)
+    ```c++
+    // PlayerBase.cpp
+    void APlayerBase::IncreaseKillCount()
+    {
+    	Super::IncreaseKillCount();
+    
+    	KillCount += 1;
+    	CurGameMode->SetPlayerKillCount(KillCount);
+    }
+
+    // BasisDefaultGameMode.cpp
+    void ABasisDefaultGameMode::SetPlayerKillCount(int32 KillCount)
+    {
+    	PlayerKillCount = KillCount;
+    	Cast<UMainHUD>(MainHUD)->SetKillCount(PlayerKillCount);
+    }
+
+    // UMainHUD.cpp
+    void UMainHUD::SetKillCount(int32 Value)
+    {
+    	if (IsValid(Txt_KillCount))
+    	{
+    		Txt_KillCount->SetText(FText::FromString(FString::Printf(TEXT("Kill: %d"), Value)));
+    	}
+    }
+    ```
+    ![GIF 2025-07-29 오후 5-48-15](https://github.com/user-attachments/assets/d136e92b-d243-4d17-a28c-3b3ee5529275)
+
+  - Bullet의 OnHit를 Buttet.StaticMeshComponent의 Hit Event로 등록하는 방법은 다음과 같다
+    ```c++
+    StaticMeshComponent->OnComponentHit.AddDynamic(this, &ABulletBase::OnHit);
+    ```
+    ![GIF 2025-07-29 오후 5-48-41](https://github.com/user-attachments/assets/570332d0-0854-4c80-9462-c4ef6c67e4fc)
+    (나의 체력이 줄어드는 것은 보여주기 위해 임시로 연결했기때문.. )
