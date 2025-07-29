@@ -325,5 +325,5 @@
     ```c++
     StaticMeshComponent->OnComponentHit.AddDynamic(this, &ABulletBase::OnHit);
     ```
-    ![GIF 2025-07-29 오후 5-48-41](https://github.com/user-attachments/assets/570332d0-0854-4c80-9462-c4ef6c67e4fc)
+    ![GIF 2025-07-29 오후 5-48-41](https://github.com/user-attachments/assets/570332d0-0854-4c80-9462-c4ef6c67e4fc)  
     (나의 체력이 줄어드는 것은 보여주기 위해 임시로 연결했기때문.. )
