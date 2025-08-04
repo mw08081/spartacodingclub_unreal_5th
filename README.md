@@ -332,3 +332,10 @@
   - [ ] cpp 사전강의 4-1
 - Today I Learned
   - 언리얼 ai를 위한 BlackBoard(메모리)와 BehaviorTree(프로그램카운터)가 존재
+  - 
+### 25.08.04
+- To Do List
+  - [ ] cpp 사전강의 4-1
+- Today I Learned
+  - 적용이 안되서 .. 적용 못하는중
+
