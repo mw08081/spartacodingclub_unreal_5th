@@ -333,9 +333,105 @@
 - Today I Learned
   - 언리얼 ai를 위한 BlackBoard(메모리)와 BehaviorTree(프로그램카운터)가 존재
   - 
-### 25.08.04
+### 25.08.06
 - To Do List
-  - [ ] cpp 사전강의 4-1
+  - [x] 3일차 과제를 cpp로 해결해보자
 - Today I Learned
-  - 적용이 안되서 .. 적용 못하는중
+  - InputMappingContext에 InputAction을 등록할때, Trigger를 등록하지않으면 여러번 눌리는것 같다.. 버그인가?
+  - IsA연산자: 비교클래스 또는 비교클래스의 하위클래스일 경우 true를 반환
+    ```c++
+    AActor* HitActor = HitResult.GetActor();
+
+    // HitActor가 Weapon 클래스로부터 파생된 클래스 또는 Weapon클래스인 경우 True를 반환
+    if (HitActor->IsA(AWeapon::StaticClass()))
+    {
+        Weapon = Cast<AWeapon>(HitActor);
+        HitActor->SetOwner(this);
+    }
+    ```
+  - AWeapon을 상속받아 Gun을 만들었다. 해당 총기의 Shot,Reload,CoolDown(Excute in Tick)함수를 추가  
+    (총기별 탄약수와 배럴온도를 저장하려면 그냥 무기를 클래스로 저장하고, 습득하는 총기별로 성능을 에디터에서 변경해주면 된다)
+    ```c++
+    // Gun.h
+    #include "CoreMinimal.h"
+    #include "Interactable/Weapon.h"
+    #include "Gun.generated.h"
+    
+    struct GunType
+    {
+    	FString Label;
+    	int32 MaxAmmoCapacity;
+    	int32 Damage;
+    
+    	GunType(FString InLabel, int32 InMaxAmmoCapacity, int32 InDamage)
+    		: Label(InLabel), MaxAmmoCapacity(InMaxAmmoCapacity), Damage(InDamage)
+    	{
+    	}
+    
+    	GunType() 
+    		: Label(""), MaxAmmoCapacity(0), Damage(0)
+    	{
+    	}
+    };
+
+    // 생략...
+    
+    //Gun.cpp
+    void AGun::Shot()
+    {
+    	if (CurAmmoCount < 1) 
+    	{
+    		UE_LOG(LogTemp, Warning, TEXT("Out of ammo..."));
+    		return;
+    	}
+    
+    	if (CurBarrelTemp > 70)
+    	{
+    		UE_LOG(LogTemp, Warning, TEXT("Can't Fire(Cur Barrel State: %s(%f))"), *GetCurBarrelState(), CurBarrelTemp);
+    		return;
+    	}
+    
+    	CurAmmoCount -= 1;
+    	CurBarrelTemp += 1;
+    	UE_LOG(LogTemp, Display, TEXT("BBang(Cur Remain Ammo Count: %d, Cur Barrel State: %s(%f))"), CurAmmoCount, *GetCurBarrelState(), CurBarrelTemp);
+    }
+    
+    void AGun::Reload()
+    {
+    	if (CurAmmoCount == MaxAmmoCapacity)
+    	{
+    		UE_LOG(LogTemp, Warning, TEXT("Already full ammo"));
+    		return;
+    	}
+    
+    	CurAmmoCount = MaxAmmoCapacity;
+    	UE_LOG(LogTemp, Display, TEXT("Reload(Cur Remain Ammo Count: %d)"), CurAmmoCount);
+    }
+    
+    /// <summary>
+    /// Excute in Tick
+    /// </summary>
+    /// <param name="DeltaTime"></param>
+    void AGun::CoolDown(float DeltaTime)
+    {
+    	CurBarrelTemp -= DeltaTime*100;
+    	UE_LOG(LogTemp, Warning, TEXT("Cool Down ...(Cur Barrel State: %s(%f))"), *GetCurBarrelState(), CurBarrelTemp);
+    
+    	if (CurBarrelTemp < 16)
+    	{
+    		bIsInCoolDown = false;
+    	}
+    }
+    
+    void AGun::SwitchWeapon(int32 Weapon)
+    {
+    	UE_LOG(LogTemp, Display, TEXT("Switch Weapon :%s"), *GunTypeList[Weapon - 1].Label);
+    
+    	MaxAmmoCapacity = GunTypeList[Weapon - 1].MaxAmmoCapacity;
+    	Damage = GunTypeList[Weapon - 1].Damage;
+    
+    	CurAmmoCount = MaxAmmoCapacity;
+    	CurBarrelTemp = 15;
+    }
+    ```
 
