@@ -252,6 +252,7 @@
     	}
     }
     ```
+    
 ### 25.07.25
 - 병원일정
 
@@ -287,6 +288,7 @@
     // FText 변수 생성
     FText::FromString(FString str);     // FText    
     ```
+  
 ### 25.07.29
 - To Do List
   - [x] UMG 연결(플레이어 호출, not tick)   
@@ -332,7 +334,7 @@
   - [ ] cpp 사전강의 4-1
 - Today I Learned
   - 언리얼 ai를 위한 BlackBoard(메모리)와 BehaviorTree(프로그램카운터)가 존재
-  - 
+    
 ### 25.08.06
 - To Do List
   - [x] 3일차 과제를 cpp로 해결해보자
