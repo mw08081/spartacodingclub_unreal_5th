@@ -439,4 +439,9 @@
     <img width="628" height="566" alt="image" src="https://github.com/user-attachments/assets/76f5d168-1119-44be-963d-ad9cce1e4ad9" />
     <img width="600" height="183" alt="image" src="https://github.com/user-attachments/assets/91025137-f8d7-4ed1-b7f9-64c559475f84" />
 
-
+### 25.08.07
+- To Do List
+  - [x] cpp 사전강의 4주차 듣고 실습해보기
+- Today I Learned
+  - Behavior Tree: Sequnece- 전부 다 성공해야 True
+  - Behavior Tree: Selector- 하나라도 실패하면 False
