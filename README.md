@@ -441,7 +441,10 @@
 
 ### 25.08.07
 - To Do List
+  - [x] 본캠프 4일차 과제
   - [x] cpp 사전강의 4주차 듣고 실습해보기
 - Today I Learned
+  - Character의 Use Controller Rotaion Yaw를 끄면 컨트롤러의 회전이 폰의 Yaw(상하축) 회전에 영향을 주지 않는다
+  - Cahracter Movement의 Orient Rotaion to Movement를 켜면 케릭터의 회전을 wasd로 조작할 수 있다
   - Behavior Tree: Sequnece- 전부 다 성공해야 True
   - Behavior Tree: Selector- 하나라도 실패하면 False
