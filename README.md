@@ -448,3 +448,11 @@
   - Cahracter Movement의 Orient Rotaion to Movement를 켜면 케릭터의 회전을 wasd로 조작할 수 있다
   - Behavior Tree: Sequnece- 전부 다 성공해야 True
   - Behavior Tree: Selector- 하나라도 실패하면 False
+  
+
+### 25.08.08
+- To Do List
+  - [ ] 본캠프 5일차 과제
+- Today I Learned
+  - `Actor->Tags`는 TArray<T>로 되어있다
+  - 갑자기 tick이 호출되지 않는다.. 미칙ㅆ당ㄴㄹ
