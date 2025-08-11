@@ -493,6 +493,7 @@
     이 부분은 `Use Complex Collsion As Simple Collision`대신 `Use Simple Collsion As Complex Collision`을 사용하니 해결됐다  
     <img width="535" height="350" alt="image" src="https://github.com/user-attachments/assets/56fb8ab8-70df-4964-87c1-fd5107625884" />
   - 컴파일이 3초이상 걸리는 작업에 대해서 블루프린트 노티파이와 같이 금방 컴파일 할 수 있는 수단을 이용하도록 하자
+  - 언리얼에서 TraceChannel을 Visibility를 사용하기보다, 커스텀으로 하나 만드는게 좋다(소리가 영향이 된다.. 나중에)
 
 
 
