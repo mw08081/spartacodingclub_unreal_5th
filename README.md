@@ -1,7 +1,7 @@
 # 사전캠프
 
 ## 중요한 가르침
-- 
+- [25.08.11.](https://github.com/mw08081/spartacodingclub_unreal_5th/blob/main/README.md#250811)
 
 ### 25.07.14
 - To Do List
@@ -492,6 +492,7 @@
     <img width="132" height="138" alt="image" src="https://github.com/user-attachments/assets/36d94451-c26f-4d5f-addf-bcff4b30153e" />  
     이 부분은 `Use Complex Collsion As Simple Collision`대신 `Use Simple Collsion As Complex Collision`을 사용하니 해결됐다  
     <img width="535" height="350" alt="image" src="https://github.com/user-attachments/assets/56fb8ab8-70df-4964-87c1-fd5107625884" />
+  - 컴파일이 3초이상 걸리는 작업에 대해서 블루프린트 노티파이와 같이 금방 컴파일 할 수 있는 수단을 이용하도록 하자
 
 
 
