@@ -491,7 +491,8 @@
     추론하건데 콜리젼이 너무 복잡해서 물리계산을 할 수 없다는 뜻같다.. 추가적으로 이상한 부분은 StaticMesh에서 ShowSimpleCollison을 체크하면 이상하게 Complex Collsion이 같이 보인다는 점이다.  
     <img width="132" height="138" alt="image" src="https://github.com/user-attachments/assets/36d94451-c26f-4d5f-addf-bcff4b30153e" />  
     이 부분은 `Use Complex Collsion As Simple Collision`대신 `Use Simple Collsion As Complex Collision`을 사용하니 해결됐다  
-    <img width="535" height="350" alt="image" src="https://github.com/user-attachments/assets/91bbfea1-8786-4780-a9f3-f8972931e900" />
+    <img width="535" height="350" alt="image" src="https://github.com/user-attachments/assets/56fb8ab8-70df-4964-87c1-fd5107625884" />
+
 
 
 
