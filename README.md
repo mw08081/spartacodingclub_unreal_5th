@@ -1,5 +1,8 @@
 # 사전캠프
 
+## 중요한 가르침
+- 
+
 ### 25.07.14
 - To Do List
   - [x] github 정리 및 블로그용 레포지토리 생성
@@ -456,3 +459,39 @@
 - Today I Learned
   - `Actor->Tags`는 TArray<T>로 되어있다
   - 갑자기 tick이 호출되지 않는다.. 미칙ㅆ당ㄴㄹ
+ 
+### 25.08.11
+- To Do List
+  - [x] 본캠프 5일차 과제(지난주 해결하지 못한 부분은 클래스를 다시 만드니까 됐다.. 하..)
+- Today I Learned
+  - SweepMutilByChannel에 대한 깊은 이해  
+    SweepMultiByChannel은 단순히 해당 범위(Start~End)를 스캔하여 다수의 액터를 검출한다고 알고있었다.  
+    하지만 실제로는 Sweep에 사용되는 도형(또는 라인)이 해당 트레이스 채널에 대해서 overlap인경우 투과되고 block인 경우 투과되지 않으며, 트레이스범위와 block을 만나 sweep이 멈추는 범위 중 작은 범위에서 조건에 맞는 액터를 검출한다.  
+    ```c++
+    FCollisionShape CollsionCapsule = FCollisionShape::MakeCapsule(35, 60);
+
+    TArray<FHitResult> HitResults;
+    FVector Start = GetActorLocation();
+    FVector End = Start + Camera->GetForwardVector() * 150.0f;
+    
+    bool bHit = GetWorld()->SweepMultiByChannel(
+        HitResults, 
+        Start, 
+        End,
+        FQuat::Identity,
+        ECC_GameTraceChannel1,
+        CollsionCapsule
+    );
+    ```
+    <img width="535" height="350" alt="TraceMultiMyChannel" src="https://github.com/user-attachments/assets/adc9517c-5237-427e-9cc4-beb5caf00031" />
+    
+    (왼쪽위에서부터 TraceChannel이 B,B,B,B, O,O,B,O이다- B:Block, O:Overlap)
+  - Fab에서 가져온 에셋이 `SetSimulatePhysics(true);`가 적용이 안된다..
+    ```(Trying to simulate physics on ''/Game/ThirdPerson/Maps/ThirdPersonMap.ThirdPersonMap:PersistentLevel.StaticMeshActor_UAID_D8BBC14F7090358402_1140807227.StaticMeshComponent0'' but it has ComplexAsSimple collision)```  
+    추론하건데 콜리젼이 너무 복잡해서 물리계산을 할 수 없다는 뜻같다.. 추가적으로 이상한 부분은 StaticMesh에서 ShowSimpleCollison을 체크하면 이상하게 Complex Collsion이 같이 보인다는 점이다.  
+    <img width="132" height="138" alt="image" src="https://github.com/user-attachments/assets/36d94451-c26f-4d5f-addf-bcff4b30153e" />  
+    이 부분은 `Use Complex Collsion As Simple Collision`대신 `Use Simple Collsion As Complex Collision`을 사용하니 해결됐다  
+    <img width="535" height="350" alt="image" src="https://github.com/user-attachments/assets/91bbfea1-8786-4780-a9f3-f8972931e900" />
+
+
+
