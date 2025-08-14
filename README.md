@@ -495,6 +495,24 @@
   - 컴파일이 3초이상 걸리는 작업에 대해서 블루프린트 노티파이와 같이 금방 컴파일 할 수 있는 수단을 이용하도록 하자
   - 언리얼에서 TraceChannel을 Visibility를 사용하기보다, 커스텀으로 하나 만드는게 좋다(소리가 영향이 된다.. 나중에)
 
+### 25.08.14
+- To Do List
+  - [x] 프로그래머스 2문제
+  - [x] 알고리즘 강의 ~2주차
+  - [ ] cpp 사전강의 ~4주차
+- Today I Learned
+  - cpp stl에 관하여
+    - cpp `map`은 '레드 블랙 트리'를 이용하기에 삽입시 정렬로 인해 `O(logN)`의 시간이 계속 소요된다. 정렬이 필요없다면 `unordered_map`을 사용하여 hash기반의 O(1)의 힘을 느껴보자
+    - `map.find()`, `map.insert()` etc...
+      ```c++
+      unordered_map<string, int> map;
 
+      map['a'] = 65;  // 현재로써 중복되지 않아, 삽입
+      map['a'] = 97;  // 중복된 키에 대해 값 교채
+
+      map.append(make_pair('b', 66)); // return true
+      map.append({'b', 98}); // return false -> 중복값에 대해서 삽입 실패를 반환
+      ```
+    - vector vs list vs deque: vector-> 전방삽입 x, 임의접근이 빠름 / list-> 전방삽입 o, 임의접근 x / deque-> 전방삽입 o, 임의접근 다소 느림 (상황에 맞춰 사용)
 
 
