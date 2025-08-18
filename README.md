@@ -515,4 +515,35 @@
       ```
     - vector vs list vs deque: vector-> 전방삽입 x, 임의접근이 빠름 / list-> 전방삽입 o, 임의접근 x / deque-> 전방삽입 o, 임의접근 다소 느림 (상황에 맞춰 사용)
 
+### 25.08.18
+- To Do List
+  - [x] 코드카타
+  - [ ] cpp 사전강의 ~4주차
+- Today I Learned
+  - 코드카타하면서 다시 사용한 유틸함수들...
+    - `#include <string>`: `stio()`
+    - `#include <algorithm>`: `reverse(it.bengin(), it.end())`
+  - `UBTTaskNode` vs `UBTService_BlackboardBase`: `UBTService_BlackboardBase`는 `UBTTaskNode`를 상속받고 추가로 `FBlackboardKeySelector`가 내부적으로 선언되어있다. 그래서 에디터에서 Blackborad키를 선택가능하며, 코드로는 `GetSelectedBlackboardKey()`를 호출할 수 있다
+  - `UBTTaskNode` vs `UBTService`: Task는 말 그대로 어떤 동작이며, Service는 동작보다 지속적으로 모니터링하거나 값을 업데이트하는 것으로 사용된다
+  - AI 관련 코드들
+    ```c++
+    // Task
+    virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
+
+    // Service 
+    virtual void TickNode(UBhaviorTreeComponent& OwnerComp, unit8* NodeMemory, float DeltaSecons) override;
+
+    #include "AIController.h"
+    OwnerComp.GetAIOwner(); // return AAIController* 
+
+    OwnerComp.GetAIOwner()->GetPawn();  // return AActor*
+    OwnerComp.GetOwner(); // return AActor*
+
+    #include "BehaviorTree/BlackboardComponent.h"
+    UBlackboardComponent* BB = OwnerComp.GetBlackboardComponent(); // return BlackboardComponent *
+
+    FName SelectedBlackboardKeyName = GetSelectedBlackboardKey();
+    BB->IsVectorValueSet(SelectedBlackboardKeyName); // return bool
+    BB->SetValueAsVector(GetSelectedBlackboardKey(), FVector); //return void
+    ```
 
