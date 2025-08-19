@@ -521,8 +521,8 @@
   - [ ] cpp 사전강의 ~4주차
 - Today I Learned
   - 코드카타하면서 다시 사용한 유틸함수들...
-    - `#include <string>`: `stio()`
-    - `#include <algorithm>`: `reverse(it.bengin(), it.end())`
+    - `#include <string>`: `stio()`, `stoll()`, `to_string()`, `string.substr( *[0, i) )`
+    - `#include <algorithm>`: `reverse(Iterator_start, Iterator_end)`, `find(Iterator_start, Iterator_end)`
   - `UBTTaskNode` vs `UBTService_BlackboardBase`: `UBTService_BlackboardBase`는 `UBTTaskNode`를 상속받고 추가로 `FBlackboardKeySelector`가 내부적으로 선언되어있다. 그래서 에디터에서 Blackborad키를 선택가능하며, 코드로는 `GetSelectedBlackboardKey()`를 호출할 수 있다
   - `UBTTaskNode` vs `UBTService`: Task는 말 그대로 어떤 동작이며, Service는 동작보다 지속적으로 모니터링하거나 값을 업데이트하는 것으로 사용된다
   - AI 관련 코드들
@@ -547,3 +547,11 @@
     BB->SetValueAsVector(GetSelectedBlackboardKey(), FVector); //return void
     ```
 
+### 25.08.18
+- To Do List
+  - [x] 코드카타
+  - [ ] cpp 사전강의 ~4주차
+- Today I Learned
+  - STL: map, set
+    - `bool map.insert({key, value})`, `Iterator map.find(key)`
+    - `pair<Iterator, bool> set.insert(value)`, `Iterator set.find(value)`
