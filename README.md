@@ -547,7 +547,7 @@
     BB->SetValueAsVector(GetSelectedBlackboardKey(), FVector); //return void
     ```
 
-### 25.08.18
+### 25.08.19
 - To Do List
   - [x] 코드카타
   - [ ] cpp 사전강의 ~4주차
