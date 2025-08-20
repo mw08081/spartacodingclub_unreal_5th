@@ -555,3 +555,15 @@
   - STL: map, set
     - `bool map.insert({key, value})`, `Iterator map.find(key)`
     - `pair<Iterator, bool> set.insert(value)`, `Iterator set.find(value)`
+
+### 25.08.20
+- To Do List
+  - [x] 코드카타
+  - [ ] cpp 사전강의 ~4주차
+- Today I Learned
+  - 알고리즘 유틸
+    - `#include <functional>`: `greater<T>()` 를 이용한 내림차순 정렬
+    - `#include <numeric>`: `int accumulate(nums.begin(), nums.end(), 0);`
+    - `#include <algoritm>`
+      - `distance(Iterator, Iterator)`: 랜덤접근이 불가한 컨테이너(list)에서 Iterator간 간격을 반환함
+      - `Iterator min_element`: 옛날에는 min_element 앞에 *를 붙이는 이유를 몰랐으나, 그것이 iterator였기때문이라고..
