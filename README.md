@@ -571,7 +571,7 @@
 ### 25.08.22
 - To Do List
   - [x] 코드카타
-  - [ ] cpp 사전강의 ~4주차
+  - [x] cpp 사전강의 ~4주차
 - Today I Learned
   - 알고리즘 유틸
     - string도 clear(), empty() 함수 호출이 가능하다.
