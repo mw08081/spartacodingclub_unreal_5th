@@ -520,7 +520,7 @@
   - [x] 코드카타
   - [ ] cpp 사전강의 ~4주차
 - Today I Learned
-  - 코드카타하면서 다시 사용한 유틸함수들...
+  - 알고리즘 유틸
     - `#include <string>`: `stio()`, `stoll()`, `to_string()`, `string.substr( *[0, i) )`
     - `#include <algorithm>`: `reverse(Iterator_start, Iterator_end)`, `find(Iterator_start, Iterator_end)`
   - `UBTTaskNode` vs `UBTService_BlackboardBase`: `UBTService_BlackboardBase`는 `UBTTaskNode`를 상속받고 추가로 `FBlackboardKeySelector`가 내부적으로 선언되어있다. 그래서 에디터에서 Blackborad키를 선택가능하며, 코드로는 `GetSelectedBlackboardKey()`를 호출할 수 있다
@@ -567,3 +567,11 @@
     - `#include <algoritm>`
       - `distance(Iterator, Iterator)`: 랜덤접근이 불가한 컨테이너(list)에서 Iterator간 간격을 반환함
       - `Iterator min_element`: 옛날에는 min_element 앞에 *를 붙이는 이유를 몰랐으나, 그것이 iterator였기때문이라고..
+
+### 25.08.22
+- To Do List
+  - [x] 코드카타
+  - [ ] cpp 사전강의 ~4주차
+- Today I Learned
+  - 알고리즘 유틸
+    - string도 clear(), empty() 함수 호출이 가능하다.
