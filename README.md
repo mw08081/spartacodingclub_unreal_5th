@@ -575,3 +575,18 @@
 - Today I Learned
   - 알고리즘 유틸
     - string도 clear(), empty() 함수 호출이 가능하다.
+
+
+### 25.08.27
+- To Do List
+  - [x] 코드카타
+  - [x] cpp 3,4 과제
+- Today I Learned
+  - 템플릿 제한하기: 아래와 같이 템플릿을 제한할 수 있다
+    ```c++
+    // 템플릿 클래스 Inventory
+    template <typename T, typename = std::enable_if_t<std::is_base_of<Item, T>::value>>
+    class Inventory
+    
+    ```
+    
