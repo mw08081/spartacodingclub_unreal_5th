@@ -587,6 +587,16 @@
     // 템플릿 클래스 Inventory
     template <typename T, typename = std::enable_if_t<std::is_base_of<Item, T>::value>>
     class Inventory
-    
     ```
+    
+### 25.08.28
+- To Do List
+  - [x] 코드카타
+  - [ ] ai 프로젝트 리펙토링
+- Today I Learned
+  - Unreal AI: 순찰  
+    ![patrol](https://github.com/user-attachments/assets/a47c98ba-2dd5-4370-a158-969b7b6636f4)  
+  - Unreal AI: 탐색과 추격  
+    ![ai2](https://github.com/user-attachments/assets/4f3797bb-9b4b-4d8f-ba80-12a5995946d7)  
+
     
