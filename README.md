@@ -592,11 +592,27 @@
 ### 25.08.28
 - To Do List
   - [x] 코드카타
-  - [ ] ai 프로젝트 리펙토링
+  - [x] ai 프로젝트 리펙토링
 - Today I Learned
   - Unreal AI: 순찰  
     ![patrol](https://github.com/user-attachments/assets/a47c98ba-2dd5-4370-a158-969b7b6636f4)  
   - Unreal AI: 탐색과 추격  
-    ![ai2](https://github.com/user-attachments/assets/4f3797bb-9b4b-4d8f-ba80-12a5995946d7)  
+    ![ai2](https://github.com/user-attachments/assets/4f3797bb-9b4b-4d8f-ba80-12a5995946d7)
 
-    
+
+### 25.09.08
+- To Do List
+  - [ ] 코드카타
+- Today I Learned
+    - cpp stl set 's function insert  
+      `std::pair<iterator,bool> insert( const value_type& value );` : A pair consisting of an iterator to the inserted element (or to the element that prevented the insertion) and a bool value set to true if and only if the insertion took place.
+      ```c++
+      unordered_set<string> s;
+      
+      s.insert("baekjoon");
+      s.insert("programmers");
+      // 삽입 실패
+      auto res = s.insert("baekjoon");
+
+      cout << res.second; // false
+      ```
