@@ -602,7 +602,7 @@
 
 ### 25.09.08
 - To Do List
-  - [ ] 코드카타
+  - [x] 코드카타
 - Today I Learned
     - cpp stl: set.insert()
       `std::pair<iterator,bool> insert( const value_type& value );` : A pair consisting of an iterator to the inserted element (or to the element that prevented the insertion) and a bool value set to true if and only if the insertion took place.
@@ -623,3 +623,10 @@
       auto res = minmax_element(vec.begin(),vec.end());
       return to_string(*res.first) + " " + to_string(*res.second);
       ```
+### 25.09.09
+- To Do List
+  - [ ] 코드카타
+  - [x] BFS/DFS 알고리즘
+- Today I Learned
+    - BFS: Queue
+    - DFS: Stack
