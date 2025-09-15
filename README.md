@@ -642,3 +642,7 @@
           return a.second > b.second;
       });
       ```
+  - How to rotate vector
+    ```c++
+    rotate(s.begin(), s.begin()+1, s.end());
+    ```
