@@ -630,3 +630,15 @@
 - Today I Learned
     - BFS: Queue
     - DFS: Stack
+
+### 25.09.15
+- To Do List
+  - [x] 코드카타
+- Today I Learned
+    - How to sort unordered_map using value
+      ```c++
+      vector<pair<int, int>> v(m.begin(), m.end());
+      sort(v.begin(), v.end(), [](const pair<int, int>& a, const pair<int, int>& b) {
+          return a.second > b.second;
+      });
+      ```
