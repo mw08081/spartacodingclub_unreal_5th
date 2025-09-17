@@ -602,7 +602,7 @@
 
 ### 25.09.08
 - To Do List
-  - [ ] 코드카타
+  - [x] 코드카타
 - Today I Learned
     - cpp stl: set.insert()
       `std::pair<iterator,bool> insert( const value_type& value );` : A pair consisting of an iterator to the inserted element (or to the element that prevented the insertion) and a bool value set to true if and only if the insertion took place.
@@ -623,3 +623,65 @@
       auto res = minmax_element(vec.begin(),vec.end());
       return to_string(*res.first) + " " + to_string(*res.second);
       ```
+### 25.09.09
+- To Do List
+  - [ ] 코드카타
+  - [x] BFS/DFS 알고리즘
+- Today I Learned
+    - BFS: Queue
+    - DFS: Stack
+
+### 25.09.15
+- To Do List
+  - [x] 코드카타
+- Today I Learned
+    - How to sort unordered_map using value
+      ```c++
+      vector<pair<int, int>> v(m.begin(), m.end());
+      sort(v.begin(), v.end(), [](const pair<int, int>& a, const pair<int, int>& b) {
+          return a.second > b.second;
+      });
+      ```
+  - How to rotate vector
+    ```c++
+    rotate(s.begin(), s.begin()+1, s.end());
+    ```
+
+### 25.09.17
+- To Do List
+  - [x] 코드카타
+- Today I Learned
+    - How to split string that contains space
+      ```c++
+      #include <sstream>
+
+      // input: Enter uid1234 Muzi
+      stringstream ss(input)
+      string cmd, uid, nickname;
+
+      ss >> cmd >> uid >> nickname;
+
+      cout << cmd << " " << uid << " " << nickname << '\n';  // Enter uid1234 Muzi
+
+      // 만약 닉네임 부분이 없는 입력이라면 nickname은 공백으로 처리된다.
+      ```
+  - string + string 의 속도 차이
+    ```c++
+    string res = m[e.second];
+    res += "님이 ";
+    if(e.first == "Enter") res += "들어왔습니다.";
+    else if(e.first == "Leave") res += "나갔습니다.";
+
+    answer.push_back(res);
+    ```
+    vs
+    ```c++
+    string action;
+    if(e.first == "Enter") action = "들어왔습니다.";
+    else if(e.first == "Leave") action = "나갔습니다.";
+
+    answer.push_back(m[e.second] + "님이 " + action);
+    ```
+    <img width="357" height="112" alt="image" src="https://github.com/user-attachments/assets/4fa7d4a9-e71c-4524-8e10-1a691035bd51" />
+
+    
