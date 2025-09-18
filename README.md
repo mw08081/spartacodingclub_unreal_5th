@@ -684,4 +684,9 @@
     ```
     <img width="357" height="112" alt="image" src="https://github.com/user-attachments/assets/4fa7d4a9-e71c-4524-8e10-1a691035bd51" />
 
-    
+### 25.09.18
+- To Do List
+  - [x] 코드카타
+- Today I Learned
+    - 나머지 연산
+      `(a + b) % k` == `(a % k + b % k) % k`
