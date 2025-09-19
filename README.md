@@ -690,3 +690,10 @@
 - Today I Learned
     - 나머지 연산
       `(a + b) % k` == `(a % k + b % k) % k`
+
+### 25.09.19
+- To Do List
+  - [x] 코드카타
+- Today I Learned
+    - 올림, 내림, 반올림 in `#include <cmath>`
+      올림: ceil, 내림: floor, 반올림: round
