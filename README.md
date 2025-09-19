@@ -695,5 +695,5 @@
 - To Do List
   - [x] 코드카타
 - Today I Learned
-    - 올림, 내림, 반올림 in `#include <cmath>`
+    - 올림, 내림, 반올림 in `#include <cmath>`  
       올림: ceil, 내림: floor, 반올림: round
