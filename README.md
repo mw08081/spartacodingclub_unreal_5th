@@ -697,3 +697,28 @@
 - Today I Learned
     - 올림, 내림, 반올림 in `#include <cmath>`  
       올림: `ceil(value)`, 내림: `floor(value)`, 반올림: `round(value)`
+
+
+
+### 25.09.22
+- To Do List
+  - [x] 코드카타
+  - [x] sparta unreal c++ 강의 완강 
+- Today I Learned
+    - 언리얼 액터 라이프 사이클
+      ```c++
+          virtual void PostInitializeComponents() override;
+          virtual void BeginPlay() override;
+          virtual void Tick(float DeltaTime) override;
+          virtual void Destroyed() override;
+          virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+      ```
+    - How to create custom Log Category name
+      ```c++
+          // "LogSparta"라는 이름으로 로그 카테고리 선언 in .h
+          DECLARE_LOG_CATEGORY_EXTERN(LogSparta, Warning, All);
+          
+          // in .cpp
+          DEFINE_LOG_CATEGORY(LogSparta);
+      ```
+      다른 소스코드에서도 해당 카테고리를 사용하고자한다면, 해당 해더파일을 임포트하면 됨.(그렇게 해서 카테고리만 모여있는 헤더파일을 만들 수 있다)
