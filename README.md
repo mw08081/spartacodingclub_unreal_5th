@@ -699,7 +699,6 @@
       올림: `ceil(value)`, 내림: `floor(value)`, 반올림: `round(value)`
 
 
-
 ### 25.09.22
 - To Do List
   - [x] 코드카타
@@ -722,3 +721,20 @@
       DEFINE_LOG_CATEGORY(LogSparta);
       ```
       다른 소스코드에서도 해당 카테고리를 사용하고자한다면, 해당 해더파일을 임포트하면 됨.(그렇게 해서 카테고리만 모여있는 헤더파일을 만들 수 있다)
+
+### 25.09.29
+- To Do List
+  - [x] 코드카타
+- Today I Learned
+    - 스켈레탈 메시 Hit Bone을 이용한 피격 부위 -> 스켈레탈 메시를 감싸는 캡슐콜라이더(루트콜라이더)와 총알의 콜리젼을 제거해줄 필요가 있음
+      ```c++
+      if (Hit.BoneName.ToString().StartsWith("Head")) {
+      	Damage *= 1.2f;
+      }
+      else if (Hit.BoneName.ToString().StartsWith("Spine")) {
+      	Damage *= 0.7f;
+      }
+      else {
+      	Damage *= 0.4f;
+      }
+      ```
