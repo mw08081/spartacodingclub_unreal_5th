@@ -738,3 +738,13 @@
       	Damage *= 0.4f;
       }
       ```
+
+### 25.09.30
+- To Do List
+  - [x] 코드카타
+- Today I Learned
+    - <numeric> 헤더에 있는 accumulate함수의 세번째 매개변수 타입을 조정하면, 리턴값도 변경된다
+      ```c++
+      double <- accumulate(it, it, 0) / (double)it.size();
+      double <- accumulate(it, it, 0.0) / it.size();        // *****
+      ```
