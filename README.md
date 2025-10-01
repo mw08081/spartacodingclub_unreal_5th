@@ -748,3 +748,26 @@
       double <- accumulate(it, it, 0) / (double)it.size();
       double <- accumulate(it, it, 0.0) / it.size();        // *****
       ```
+
+### 25.10.01
+- To Do List
+  - [x] 코드카타
+- Today I Learned
+    - 에라토스테네스 체의 이면  
+      일단 오늘의 주인공을 소개한다  
+      ```c++
+      bool isPrime(long long num) {
+          if (num < 2) return false;
+          for (long long i = 2; i * i <= num; i++) {
+              if (num % i == 0) return false;
+          }
+          return true;
+      }
+      ```  
+      소수와 관련된 문제는 항상 에라토스테네스의 체를 사용했다. 하지만 [이 문제](https://school.programmers.co.kr/learn/courses/30/lessons/92335#)는 달랐다.  
+      에라토스테네스의 체는 반복적으로 소수를 판별하는데 유용하다. 반면 이 문제는 최대 1111111111111(13자리, 797161의 3진법) 까지 소수인지 구분해야했다.  
+  
+      에라토스테네스의 체를 아무런 생각없이 사용했고, 1111111111111까지 소수를 구하려고 하니 시간초과가 났다. 메모리도 부족했다.  
+      결과적으로 1111111111111와 같이 한번만 이 수가 소수인지 아닌지를 판별하는 경우에는 위의 코드를 사용하는게 더 나을 수도 있다는 뜻이다(메모리나 시간적 측면에서)  
+  
+      이를 고려해서 앞으로는 직접 소수를 구하는 방법과 에라토스테네스의 체를 이용한 방법 두가지를 고려해보자
