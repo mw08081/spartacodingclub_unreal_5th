@@ -771,3 +771,31 @@
       결과적으로 1111111111111와 같이 한번만 이 수가 소수인지 아닌지를 판별하는 경우에는 위의 코드를 사용하는게 더 나을 수도 있다는 뜻이다(메모리나 시간적 측면에서)  
   
       이를 고려해서 앞으로는 직접 소수를 구하는 방법과 에라토스테네스의 체를 이용한 방법 두가지를 고려해보자
+
+### 25.10.02
+- To Do List
+  - [x] 코드카타
+- Today I Learned
+    - 스폰 룰(Spawn Collision Handling Method)
+      ```c++
+      FVector SpawnLocation = ...; // 원하는 스폰 위치
+      FRotator SpawnRotation = ...; // 원하는 스폰 회전
+      
+      FActorSpawnParameters SpawnParams;
+      SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn; 
+      // 충돌이 있으면 위치를 조정하되, 가능하지 않으면 그래도 스폰
+      // 또는 ESpawnActorCollisionHandlingMethod::AlwaysSpawn, ESpawnActorCollisionHandlingMethod::FailIfColliding 등 선택 가능
+      
+      // 실제 스폰 시도
+      ABP_AIBase_C* SpawnedActor = GetWorld()->SpawnActor<ABP_AIBase_C>(BP_AIBaseClass, SpawnLocation, SpawnRotation, SpawnParams);
+      
+      if (!SpawnedActor)
+      {
+          UE_LOG(LogTemp, Warning, TEXT("Failed to spawn BP_AIBase_C at location %s"), *SpawnLocation.ToString());
+      }
+      ```
+      스폰 룰 옵션
+      - AlwaysSpawn: 무조건 스폰, 충돌 무시 (주의 필요)
+      - AdjustIfPossibleButAlwaysSpawn: 충돌 위치가 있으면 위치 조정 시도, 그래도 안되면 무조건 스폰
+      - AdjustIfPossibleButDontSpawnIfColliding: 충돌 시 위치 조정 후 실패 시 스폰 안함
+      - DontSpawnIfColliding: 충돌 시 스폰 안함
