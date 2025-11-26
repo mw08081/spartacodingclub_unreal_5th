@@ -29,8 +29,8 @@
     - 서버에는 ClientConnection이 TArray<>형태로 저장되고, 클라이언트는 ServerConnection 생성된다(ServerConnection == nullptr -> Server)
   - NetRole
     - 복제된 곳에 롤과 생성된 곳의 롤이 두가지 존재
-    - 서버에서 생성된 경우 Authority <-> Autonomous Proxy
-    - 다른 클라이언트 입장에서는 Authority <-> Simulated Proxy
+    - 서버에서 생성된 경우 Authority <-> Autonomous Proxy(LocalRole <-> RemoteRole)
+    - 다른 클라이언트 입장에서는 Authority <-> Simulated Proxy(LocalRole <-> RemoteRole)
 
 ### 25.10.02
 - To Do List
