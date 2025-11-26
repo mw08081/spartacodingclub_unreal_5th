@@ -9,8 +9,8 @@
   - [x] 4-4 완강 
 - Today I Learned
   - Server Init Function
-    - AGameMode: OnPreLogin(), OnPostLogin(), Login() 
-    - APlayerController: PostNetInit(), OnActorChannelOpen()
+    - AGameMode: OnPreLogin(), OnPostLogin(), Login(), StartPlay()
+    - APlayerController: PostNetInit(), OnActorChannelOpen(), PostInitializeComponents()
   - 네트워크 연결 단위
     - Connection: NetDriver가 관리.(서버는 ClientConnection을 가지고 클라이언트는 ServerConnection 을 갖음)
     - Channel: NetConnection 아래에서 리플리케이트 되는 단위? -> ActorChannel, ControllChannel ...etc
