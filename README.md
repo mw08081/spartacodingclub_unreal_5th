@@ -8,6 +8,16 @@
   - [x] 코드카타
   - [x] 4-4 완강 
 - Today I Learned
+  - Server Init Function
+    - AGameMode: OnPreLogin(), OnPostLogin(), Login() 
+    - APlayerController: PostNetInit(), OnActorChannelOpen()
+    
+
+### 25.11.25
+- To Do List
+  - [x] 코드카타
+  - [x] 4-3 완강 
+- Today I Learned
   - Net Connection + NetDriver
     - Net Connection이 연결되면 NetDirver가 생성
     - 서버에는 ClientConnection이 TArray<>형태로 저장되고, 클라이언트는 ServerConnection 생성된다(ServerConnection == nullptr -> Server)
